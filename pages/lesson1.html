@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/common.css" />
+    <script src="../utils/webgl-helper.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 顶点着色器源码 -->
+    <script type="shader-source" id="vertexShader">
+      void main() {
+        // 声明顶点位置
+        gl_Position = vec4(0.0,0.0,0.0,1.0);
+        // 声明要绘制的点的大小
+        gl_PointSize = 10.0;
+      }
+    </script>
+    <!-- 片元着色器源码 -->
+    <script type="shader-source" id="fragmentShader">
+      void main() {
+        // 设置像素颜色为红色
+        gl_FragColor = vec4(1.0,0.0,0.0,1.0);
+      }
+    </script>
+    <canvas id="canvas"></canvas>
+    <script>
+      //获取canvas
+      let canvas = getCanvas("#canvas");
+      //设置canvas尺寸为满屏
+      resizeCanvas(canvas);
+      //获取绘图上下文
+      let gl = getContext(canvas);
+      //创建定点着色器
+      let vertexShader = createShaderFromScript(
+        gl,
+        gl.VERTEX_SHADER,
+        "vertexShader"
+      );
+      //创建片元着色器
+      let fragmentShader = createShaderFromScript(
+        gl,
+        gl.FRAGMENT_SHADER,
+        "fragmentShader"
+      );
+      //创建着色器程序
+      let program = createSimpleProgram(gl, vertexShader, fragmentShader);
+      //使用该着色器程序
+      gl.useProgram(program);
+      //设置清屏颜色为黑色。
+      gl.clearColor(0, 0, 0, 1.0);
+      //清屏
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      //绘制一个点。
+      gl.drawArrays(gl.POINTS, 0, 1);
+    </script>
+  </body>
+</html>
