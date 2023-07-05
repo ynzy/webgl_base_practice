@@ -1,11 +1,11 @@
 
-var random = Math.random;
+
 function randomColor() {
     return {
-        r: random() * 255,
-        g: random() * 255,
-        b: random() * 255,
-        a: random() * 1
+        r: Math.random() * 255,
+        g: Math.random() * 255,
+        b: Math.random() * 255,
+        a: Math.random() * 1
     };
 }
 
